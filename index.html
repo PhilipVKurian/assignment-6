@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header> 
+
+    <main>
+        <article>
+            <aside>
+                <input class="input is-success" id="city-name" type="text" placeholder="Search for a city">
+                <button class="button is-link" id="search-button">Search</button>                
+                <div id="stored-cities">
+                </div>
+            </aside>
+            <section>
+                <div id="today">
+                    <div id="date-today"></div>
+                    <div id="icon-today"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Placeholder image"></div>
+                    <h2>City Name</h2>
+                    <footer class="card-footer">
+                        <li href="#" class="card-footer-item"></li>
+                        <li href="#" class="card-footer-item">Humidity: 65%</li>
+                        <li href="#" class="card-footer-item">Wind: 3.89 MPH</li>
+                    </footer>
+                    
+                </div>
+                
+                <h2 class="title-forecast">5 Day Forecast: </h2>
+                
+                <div class="content">
+                    <div class="card" id="day-1">
+                        <div class="card-content">
+                          <p class="title">
+                           Midnight- Check Current
+                          </p>
+                          <div class="card-image">
+                            <figure class="image is-96x96">
+                              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Placeholder image">
+                            </figure>
+                            </div> 
+                        </div>    
+                        <footer class="card-footer">
+                            <li href="#" class="card-footer-item">Temp: </li>
+                            <li href="#" class="card-footer-item">Humidity: </li>
+                            <li href="#" class="card-footer-item">Wind: </li>
+                        </footer>
+                    </div>
+                    
+
+                    <div class="card" id="day-2">
+                        <div class="card-content">
+                          <p class="title">
+                           09/09/1991
+                          </p>
+                          <div class="card-image">
+                            <figure class="image is-96x96">
+                              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Placeholder image">
+                            </figure>
+                            </div> 
+                        </div>    
+                        <footer class="card-footer">
+                            <li href="#" class="card-footer-item">Temp: 30 C</li>
+                            <li href="#" class="card-footer-item">Humidity: 65%</li>
+                            <li href="#" class="card-footer-item">Wind: 3.89 MPH</li>
+                        </footer>
+                    </div>
+                    
+
+                    <div class="card" id="day-3">
+                        <div class="card-content">
+                          <p class="title">
+                           09/09/1991
+                          </p>
+                          <div class="card-image">
+                            <figure class="image is-96x96">
+                              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Placeholder image">
+                            </figure>
+                            </div> 
+                        </div>    
+                        <footer class="card-footer">
+                            <li href="#" class="card-footer-item">Temp: 30 C</li>
+                            <li href="#" class="card-footer-item">Humidity: 65%</li>
+                            <li href="#" class="card-footer-item">Wind: 3.89 MPH</li>
+                        </footer>
+                    </div>
+
+                    <div class="card" id="day-4">
+                        <div class="card-content">
+                          <p class="title">
+                           09/09/1991
+                          </p>
+                          <div class="card-image">
+                            <figure class="image is-96x96">
+                              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Placeholder image">
+                            </figure>
+                            </div> 
+                        </div>    
+                        <footer class="card-footer">
+                            <li href="#" class="card-footer-item">Temp: 30 C</li>
+                            <li href="#" class="card-footer-item">Humidity: 65%</li>
+                            <li href="#" class="card-footer-item">Wind: 3.89 MPH</li>
+                        </footer>
+                    </div>
+
+                    <div class="card" id="day-5">
+                        <div class="card-content">
+                          <p class="title">
+                           09/09/1991
+                          </p>
+                          <div class="card-image">
+                            <figure class="image is-96x96">
+                              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Placeholder image">
+                            </figure>
+                            </div> 
+                        </div>    
+                        <footer class="card-footer">
+                            <li href="#" class="card-footer-item">Temp: 30 C</li>
+                            <li href="#" class="card-footer-item">Humidity: 65%</li>
+                            <li href="#" class="card-footer-item">Wind: 3.89 MPH</li>
+                        </footer>
+                    </div>
+                    
+                   
+                </div>
+            </section>
+        </article>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+    crossorigin="anonymous"></script>
+    <script src="./assets/scripts/script.js"></script>
+</body>
+</html>
