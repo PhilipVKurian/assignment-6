@@ -3,7 +3,7 @@ $(document).ready(function() {
     var hour = dayjs().format('HH');
 
     var DisplayWeather = function(n){
-        var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
+        var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
         fetch(apiUrl).then(function(response){
             if (response.ok){
                 response.json().then(function(data){
@@ -16,7 +16,7 @@ $(document).ready(function() {
                 })
             }
         })        
-        var fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
+        var fiveDayUrl = "http://api.openweathermap.org/data/2.5/forecast?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
         fetch(fiveDayUrl).then(function(response){
             if (response.ok){
                 response.json().then(function(data){
