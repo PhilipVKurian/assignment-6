@@ -1,7 +1,7 @@
 $(document).ready(function() {   
     var day = dayjs().format('DD');
     var hour = dayjs().format('HH');
-
+    localStorage.removeItem("debug");
     var DisplayWeather = function(n){
         var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
         fetch(apiUrl).then(function(response){
