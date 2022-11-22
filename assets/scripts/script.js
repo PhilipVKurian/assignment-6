@@ -1,7 +1,7 @@
+localStorage.removeItem("debug");
 $(document).ready(function() {   
     var day = dayjs().format('DD');
     var hour = dayjs().format('HH');
-    localStorage.removeItem("debug");
     var DisplayWeather = function(n){
         var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
         fetch(apiUrl).then(function(response){
@@ -27,9 +27,6 @@ $(document).ready(function() {
                         let currentDay = parseInt(day);
                         let currentHour = parseInt(hour);
                         var dayNumber = 0;
-                        console.log(arrayTime + "arraytime");
-                        console.log(currentHour + "current");
-
                         if(currentDay+1 == arrayDay && (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
                             dayNumber = 1;
                             populateCards(dayNumber, data, i);
@@ -46,16 +43,14 @@ $(document).ready(function() {
                             dayNumber = 5;
                             populateCards(dayNumber, data, i);
                         }
-
                     }
-
                 })
             }
         })
 
         function populateCards (d, data, i){
             console.log(data + "data");
-            $('#day-'+ d).find('img').attr("src", "http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+"@2x.png");
+            $('#day-'+ d).find('img').attr("src", "https://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+"@2x.png");
             $('#day-'+ d).find('.title').text(data.list[i].dt_txt);
             $('#day-'+ d).find('.card-footer').children('li').eq(0).text("Temperature: "+data.list[i].main.temp + " C");
             $('#day-'+ d).find('.card-footer').children('li').eq(1).text("Humidity: "+data.list[i].main.humidity + " %");
@@ -64,7 +59,7 @@ $(document).ready(function() {
         }
     }; 
     
-    if(localStorage.length == 0)
+    if(localStorage.length == 0 )
        $('section').css("visibility", "hidden");
     else
         for(var i = 0; i < localStorage.length; i++){
@@ -74,7 +69,7 @@ $(document).ready(function() {
             buttonNew.value = localStorage[i+1];
             $("#stored-cities").append(buttonNew);
         }
-        DisplayWeather(localStorage[i]);
+        DisplayWeather(localStorage.getItem(1));
 
     $('#search-button').click( function(){
         $('section').css("visibility", "visible");
@@ -86,7 +81,12 @@ $(document).ready(function() {
         }
         else{
             localStorage.setItem(localStorage.length+1, cityName);
-            DisplayWeather(cityName);            
+            var buttonNew = document.createElement("button");
+            buttonNew.className = "button is-link created";
+            buttonNew.innerHTML = cityName;
+            $("#stored-cities").append(buttonNew);
+            DisplayWeather(cityName); 
+            location.reload();           
         } 
     });
     $(".created").click(function(){
