@@ -30,7 +30,6 @@ header{
     color: white;
 }
 
-
 body{
     margin:0;
     width: 100%;
@@ -81,6 +80,7 @@ section{
     text-align: center;
     color: white;
 }
+
 #today {
     display: flex;
     justify-content: space-evenly;

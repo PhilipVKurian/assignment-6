@@ -1,4 +1,4 @@
-localStorage.removeItem("debug");
+
 $(document).ready(function() {   
     var day = dayjs().format('DD');
     var hour = dayjs().format('HH');
@@ -61,15 +61,20 @@ $(document).ready(function() {
     
     if(localStorage.length == 0 )
        $('section').css("visibility", "hidden");
-    else
+    else{        
         for(var i = 0; i < localStorage.length; i++){
-            var buttonNew = document.createElement("button");
-            buttonNew.className = "button is-link created";
-            buttonNew.innerHTML = localStorage[i+1];
-            buttonNew.value = localStorage[i+1];
-            $("#stored-cities").append(buttonNew);
+
+            if( localStorage.getItem(i) != null){
+                var buttonNew = document.createElement("button");
+                buttonNew.className = "button is-link created";
+                buttonNew.innerHTML = localStorage[i];
+                buttonNew.value = localStorage[i];
+                $("#stored-cities").append(buttonNew);                
+            }
         }
-        DisplayWeather(localStorage.getItem(1));
+        DisplayWeather(localStorage.getItem(localStorage.length-1));
+    }  
+
 
     $('#search-button').click( function(){
         $('section').css("visibility", "visible");
@@ -80,17 +85,19 @@ $(document).ready(function() {
             return;
         }
         else{
-            localStorage.setItem(localStorage.length+1, cityName);
+            localStorage.setItem(localStorage.length, cityName);
             var buttonNew = document.createElement("button");
             buttonNew.className = "button is-link created";
             buttonNew.innerHTML = cityName;
+            buttonNew.value = cityName;
             $("#stored-cities").append(buttonNew);
-            DisplayWeather(cityName); 
-            location.reload();           
+            DisplayWeather(cityName);                  
         } 
+        location.reload();        
     });
+
     $(".created").click(function(){
         var cityName = $(this).val();
-        DisplayWeather(cityName);
+        DisplayWeather(cityName);  
     })
 });
