@@ -1,7 +1,8 @@
-
+//Wait till document is ready
 $(document).ready(function() {   
     var day = dayjs().format('DD');
     var hour = dayjs().format('HH');
+    //displays the weather recieving the city as a parameter (string)
     var DisplayWeather = function(n){
         var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
         fetch(apiUrl).then(function(response){
@@ -15,12 +16,12 @@ $(document).ready(function() {
                     $('.card-footer').children('li').eq(2).text("Wind: "+data.wind.speed + " MPH");
                 })
             }
-        })        
+        })    
+        //fetch and display the 5 day forecast for the current time    
         var fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+n+"&units=metric&appid=ee1d180c5b424d260ddb1d1ce6058778";
         fetch(fiveDayUrl).then(function(response){
             if (response.ok){
                 response.json().then(function(data){
-
                     for(var i = 0; i < data.list.length; i++){
                         var arrayDay = parseInt(data.list[i].dt_txt.slice(8,10));
                         var arrayTime = parseInt(data.list[i].dt_txt.slice(11,13));
@@ -47,7 +48,7 @@ $(document).ready(function() {
                 })
             }
         })
-
+        //when called will populate the html elements with data extracted from the api
         function populateCards (d, data, i){
             console.log(data + "data");
             $('#day-'+ d).find('img').attr("src", "https://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+"@2x.png");
@@ -58,7 +59,7 @@ $(document).ready(function() {
 
         }
     }; 
-    
+    //On page load will check if any cities are in local storage and if not will hide html elements, if objects are present buttons will be created with their values
     if(localStorage.length == 0 )
        $('section').css("visibility", "hidden");
     else{        
@@ -75,7 +76,7 @@ $(document).ready(function() {
         DisplayWeather(localStorage.getItem(localStorage.length-1));
     }  
 
-
+    //click handler for the search button
     $('#search-button').click( function(){
         $('section').css("visibility", "visible");
         var cityName = $(this).siblings('#city-name').val();
@@ -95,7 +96,7 @@ $(document).ready(function() {
         } 
         location.reload();        
     });
-
+    //click handler for the created buttons of saved cities
     $(".created").click(function(){
         var cityName = $(this).val();
         DisplayWeather(cityName);  
