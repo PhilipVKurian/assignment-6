@@ -8,7 +8,6 @@ $(document).ready(function() {
         fetch(apiUrl).then(function(response){
             if (response.ok){
                 response.json().then(function(data){
-                    console.log(data.weather[0].icon);
                     $('#today').children('h2').text(data.name);
                     $('#icon-today').children('img').attr("src", "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png");
                     $('.card-footer').children('li').eq(0).text("Temperature: "+data.main.temp + " C");
@@ -27,20 +26,25 @@ $(document).ready(function() {
                         var arrayTime = parseInt(data.list[i].dt_txt.slice(11,13));
                         let currentDay = parseInt(day);
                         let currentHour = parseInt(hour);
+                        var arrayDate =  dayjs(data.list[i].dt_txt.slice(0,10));
+                        var currentDate = dayjs();
+
+
+                        var dateDifference = arrayDate.diff(currentDate , 'day');
                         var dayNumber = 0;
-                        if(currentDay+1 == arrayDay && (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        if(dateDifference == 0 && (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
                             dayNumber = 1;
                             populateCards(dayNumber, data, i);
-                        }else if(currentDay+2 == arrayDay &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 1 &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
                             dayNumber = 2;
                             populateCards(dayNumber, data, i);
-                        }else if(currentDay+3 == arrayDay &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 2 &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
                             dayNumber = 3;
                             populateCards(dayNumber, data, i);
-                        }else if(currentDay+4 == arrayDay  &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 3  &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
                             dayNumber = 4;
                             populateCards(dayNumber, data, i);
-                        }else if(currentDay+5 == arrayDay  &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 4  &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
                             dayNumber = 5;
                             populateCards(dayNumber, data, i);
                         }
@@ -50,7 +54,6 @@ $(document).ready(function() {
         })
         //when called will populate the html elements with data extracted from the api
         function populateCards (d, data, i){
-            console.log(data + "data");
             $('#day-'+ d).find('img').attr("src", "https://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+"@2x.png");
             $('#day-'+ d).find('.title').text(data.list[i].dt_txt);
             $('#day-'+ d).find('.card-footer').children('li').eq(0).text("Temperature: "+data.list[i].main.temp + " C");
