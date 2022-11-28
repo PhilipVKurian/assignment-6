@@ -1,4 +1,4 @@
-//Wait till document is ready
+                  //Wait till document is ready
 $(document).ready(function() {   
     var day = dayjs().format('DD');
     var hour = dayjs().format('HH');
@@ -22,29 +22,26 @@ $(document).ready(function() {
             if (response.ok){
                 response.json().then(function(data){
                     for(var i = 0; i < data.list.length; i++){
-                        var arrayDay = parseInt(data.list[i].dt_txt.slice(8,10));
                         var arrayTime = parseInt(data.list[i].dt_txt.slice(11,13));
-                        let currentDay = parseInt(day);
                         let currentHour = parseInt(hour);
                         var arrayDate =  dayjs(data.list[i].dt_txt.slice(0,10));
                         var currentDate = dayjs();
-
-
+                        var hourDifference = arrayTime-currentHour;
                         var dateDifference = arrayDate.diff(currentDate , 'day');
                         var dayNumber = 0;
-                        if(dateDifference == 0 && (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        if(dateDifference == 0 && [0,1,-1,-23].includes(hourDifference)){
                             dayNumber = 1;
                             populateCards(dayNumber, data, i);
-                        }else if(dateDifference == 1 &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 1 &&  [0,1,-1,-23].includes(hourDifference)){
                             dayNumber = 2;
                             populateCards(dayNumber, data, i);
-                        }else if(dateDifference == 2 &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 2 &&  [0,1,-1,-23].includes(hourDifference)){
                             dayNumber = 3;
                             populateCards(dayNumber, data, i);
-                        }else if(dateDifference == 3  &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 3  &&  [0,1,-1,-23].includes(hourDifference)){
                             dayNumber = 4;
                             populateCards(dayNumber, data, i);
-                        }else if(dateDifference == 4  &&  (arrayTime-currentHour == 0 || arrayTime-currentHour == 1 || arrayTime-currentHour == -1 || arrayTime-currentHour == -23)){
+                        }else if(dateDifference == 4  &&  [0,1,-1,-23].includes(hourDifference)){
                             dayNumber = 5;
                             populateCards(dayNumber, data, i);
                         }
@@ -61,7 +58,7 @@ $(document).ready(function() {
             $('#day-'+ d).find('.card-footer').children('li').eq(2).text("Wind: "+data.list[i].wind.speed + " MPH");
 
         }
-    }; 
+    }
     //On page load will check if any cities are in local storage and if not will hide html elements, if objects are present buttons will be created with their values
     if(localStorage.length == 0 )
        $('section').css("visibility", "hidden");
@@ -104,4 +101,4 @@ $(document).ready(function() {
         var cityName = $(this).val();
         DisplayWeather(cityName);  
     })
-});
+})
